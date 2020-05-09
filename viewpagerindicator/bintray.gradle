@@ -33,7 +33,7 @@ publishing {
     publications {
         release(MavenPublication) {
 //            artifact javadocJar
-            artifact("$buildDir/outputs/aar/pagerindicator-release.aar")
+            artifact("$buildDir/outputs/aar/viewpagerindicator-release.aar")
             artifact sourcesJar
             groupId project.ext.groupId
             artifactId project.ext.artifactId
