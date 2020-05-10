@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import java.util.Arrays;
+import java.util.List;
 
 import io.github.vejei.viewpagerindicator.indicator.RectIndicator;
 
@@ -31,20 +32,20 @@ public class RectIndicatorFragment extends Fragment {
         if (activity == null) return;
 
         PageAdapter pageAdapter = new PageAdapter();
-        pageAdapter.setData(Arrays.asList(activity.data));
         ViewPager2 viewPager2 = view.findViewById(R.id.view_pager2);
         viewPager2.setAdapter(pageAdapter);
+        pageAdapter.setData(Arrays.asList(activity.data));
 
         RectIndicator rectIndicator = view.findViewById(R.id.rect_indicator);
-        rectIndicator.setWithViewPager2(viewPager2, false);
-        rectIndicator.setItemCount(activity.data.length);
+        rectIndicator.setWithViewPager2(viewPager2);
 
         RectIndicator squareIndicator = view.findViewById(R.id.square_indicator);
-        squareIndicator.setWithViewPager2(viewPager2, false);
-        squareIndicator.setItemCount(activity.data.length);
+        squareIndicator.setWithViewPager2(viewPager2);
 
         RectIndicator stadiumIndicator = view.findViewById(R.id.stadium_indicator);
-        stadiumIndicator.setWithViewPager2(viewPager2, false);
-        stadiumIndicator.setItemCount(activity.data.length);
+        stadiumIndicator.setWithViewPager2(viewPager2);
+
+        List<String> newData = Arrays.asList("Seventh", "Eighth", "Ninth");
+        pageAdapter.append(newData);
     }
 }
