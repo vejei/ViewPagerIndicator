@@ -30,7 +30,7 @@ public class CircleIndicatorFragment extends Fragment {
         MainActivity activity = (MainActivity) getActivity();
         if (activity == null) return;
 
-        PageAdapter pageAdapter = new PageAdapter();
+        InfinitePageAdapter pageAdapter = new InfinitePageAdapter();
         pageAdapter.setData(Arrays.asList(activity.data));
         ViewPager2 viewPager2 = view.findViewById(R.id.view_pager2);
         viewPager2.setAdapter(pageAdapter);
