@@ -4,7 +4,7 @@ apply plugin: 'maven-publish'
 ext {
     groupId = 'io.github.vejei.viewpagerindicator'
     artifactId = 'viewpagerindicator'
-    versionName = '1.0.0-alpha'
+    versionName = '1.0.0-alpha.1'
 }
 
 version = ext.versionName
