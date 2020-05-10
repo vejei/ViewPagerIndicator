@@ -4,7 +4,7 @@ The indicator for Android ViewPager2 and ViewPager.
 ## Download
 ```groovy
 dependencies {
-    implementation 'io.github.vejei.viewpagerindicator:viewpagerindicator:1.0.0-alpha'
+    implementation 'io.github.vejei.viewpagerindicator:viewpagerindicator:1.0.0-alpha.1'
 }
 ```
 
@@ -101,5 +101,7 @@ Check the `Attributes` section for details of other methods.
 ## Screenshots
 
 ## Change Log
+[Change Log](./CHANGELOG.md)
 
 ## License
+[MIT](./LICENSE)
