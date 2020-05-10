@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PageAdapter extends RecyclerView.Adapter<PageAdapter.ViewHolder> {
+public class InfinitePageAdapter extends RecyclerView.Adapter<InfinitePageAdapter.ViewHolder> {
     private List<String> data = new ArrayList<>();
 
     void setData(List<String> data) {
