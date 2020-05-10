@@ -99,6 +99,9 @@ Check the `Attributes` section for details of other methods.
 |`indicatorCornerRadius`|The rounded radius of the rectangle. radius.|Dimension|`0dp`|
 
 ## Screenshots
+|`CircleIndicator`|`RectIndicator`|
+|---|---|
+|![](./screenshots/circle_indicator.gif)|![](./screenshots/rect_indicator.gif)|
 
 ## Change Log
 [Change Log](./CHANGELOG.md)
