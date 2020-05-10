@@ -1,6 +1,7 @@
 package io.github.vejei.viewpagerindicator.indicator;
 
 import android.content.Context;
+import android.database.DataSetObserver;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -31,6 +33,35 @@ abstract class ViewPagerIndicator extends View {
     protected ViewPager2.OnPageChangeCallback onPageChangeCallback;
     protected ViewPager viewPager;
     protected ViewPager.OnPageChangeListener onPageChangeListener;
+
+    protected boolean useViewPager2ItemCount = false;
+    protected boolean useViewPagerItemCount = false;
+    protected RecyclerView.AdapterDataObserver viewPager2DataSetChangeObserver = new RecyclerView.AdapterDataObserver() {
+        @Override
+        public void onChanged() {
+            if (useViewPager2ItemCount) {
+                RecyclerView.Adapter adapter = viewPager2.getAdapter();
+                if (adapter != null) {
+                    setItemCount(adapter.getItemCount());
+                } else {
+                    setItemCount(0);
+                }
+            }
+        }
+    };
+    protected DataSetObserver viewPagerDataSetChangeObserver = new DataSetObserver() {
+        @Override
+        public void onChanged() {
+            if (useViewPagerItemCount) {
+                PagerAdapter adapter = viewPager.getAdapter();
+                if (adapter != null) {
+                    setItemCount(adapter.getCount());
+                } else {
+                    setItemCount(0);
+                }
+            }
+        }
+    };
 
     ViewPagerIndicator(Context context) {
         super(context);
@@ -120,7 +151,7 @@ abstract class ViewPagerIndicator extends View {
     }
 
     protected int getActualPosition(int position) {
-        return position % getItemCount();
+        return getItemCount() != 0 ? position % getItemCount() : 0;
     }
 
     public void setWithViewPager2(ViewPager2 viewPager2) {
@@ -129,6 +160,7 @@ abstract class ViewPagerIndicator extends View {
 
     public void setWithViewPager2(ViewPager2 viewPager2, boolean useItemCount) {
         this.viewPager2 = viewPager2;
+        this.useViewPager2ItemCount = useItemCount;
         onPageChangeCallback = new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -143,6 +175,7 @@ abstract class ViewPagerIndicator extends View {
                 setItemCount(0);
             } else {
                 setItemCount(adapter.getItemCount());
+                adapter.registerAdapterDataObserver(viewPager2DataSetChangeObserver);
             }
         }
     }
@@ -153,6 +186,7 @@ abstract class ViewPagerIndicator extends View {
 
     public void setWithViewPager(ViewPager viewPager, boolean useItemCount) {
         this.viewPager = viewPager;
+        this.useViewPagerItemCount = useItemCount;
         this.onPageChangeListener = new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -166,16 +200,34 @@ abstract class ViewPagerIndicator extends View {
             public void onPageScrollStateChanged(int state) {}
         };
         this.viewPager.addOnPageChangeListener(onPageChangeListener);
+
+        if (useItemCount) {
+            PagerAdapter adapter = this.viewPager.getAdapter();
+            if (adapter == null) {
+                setItemCount(0);
+            } else {
+                setItemCount(adapter.getCount());
+                adapter.registerDataSetObserver(viewPagerDataSetChangeObserver);
+            }
+        }
     }
 
     public void release() {
         if (this.viewPager2 != null && this.onPageChangeCallback != null) {
             this.viewPager2.unregisterOnPageChangeCallback(onPageChangeCallback);
+            RecyclerView.Adapter adapter = this.viewPager2.getAdapter();
+            if (adapter != null) {
+                adapter.unregisterAdapterDataObserver(viewPager2DataSetChangeObserver);
+            }
             this.viewPager2 = null;
             this.onPageChangeCallback = null;
         }
         if (this.viewPager != null && this.onPageChangeListener != null) {
             this.viewPager.removeOnPageChangeListener(onPageChangeListener);
+            PagerAdapter adapter = this.viewPager.getAdapter();
+            if (adapter != null) {
+                adapter.unregisterDataSetObserver(viewPagerDataSetChangeObserver);
+            }
             this.viewPager = null;
             this.onPageChangeListener = null;
         }
