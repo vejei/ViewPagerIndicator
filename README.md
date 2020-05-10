@@ -70,8 +70,8 @@ Check the `Attributes` section for details of other methods.
 ### `RectIndicator`
 |Method|Description|
 |---|---|
-|`setWithViewPager2`|Set `ViewPager2` for The indicator. The `userItemCount` parameter indicates whether to use the item count of `ViewPager2`. If the value is true, the indicator use the `ViewPager`'s item count, if it is false, you need to call `setItemCount` every time the adapter's dataset changed, the default value is true. |
-|`setWithViewPager`|Set `ViewPager` for The indicator. The `userItemCount` parameter indicates whether to use the item count of `ViewPager`. If the value is true, the indicator use the `ViewPager`'s item count, if it is false, you need to call `setItemCount` every time the adapter's dataset changed, the default value is true.|
+|`setWithViewPager2`|Set `ViewPager2` for the indicator. The `userItemCount` parameter indicates whether to use the item count of `ViewPager2`. If the value is true, the indicator use the `ViewPager`'s item count, if it is false, you need to call `setItemCount` every time the adapter's dataset changed, the default value is true. |
+|`setWithViewPager`|Set `ViewPager` for the indicator. The `userItemCount` parameter indicates whether to use the item count of `ViewPager`. If the value is true, the indicator use the `ViewPager`'s item count, if it is false, you need to call `setItemCount` every time the adapter's dataset changed, the default value is true.|
 |`setAnimationMode`|Set animation used by the indicator.|
 |`release`|Unregister the callback or listener of the `ViewPager2`(or `ViewPager`) and the observer of the `ViewPager2`(or `ViewPager`)'s adapter|
 
