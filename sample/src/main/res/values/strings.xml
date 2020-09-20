@@ -2,4 +2,5 @@
     <string name="app_name">ViewPagerIndicator</string>
     <string name="main_circle_indicator_button_text">Circle Indicator</string>
     <string name="main_rect_indicator_button_text">Rect Indicator</string>
+    <string name="main_rect_indicator_rtl_button_text">Rect Indicator Rtl</string>
 </resources>

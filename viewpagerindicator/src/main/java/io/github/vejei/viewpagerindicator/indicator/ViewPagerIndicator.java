@@ -283,6 +283,9 @@ abstract class ViewPagerIndicator extends View {
         }
     }
 
+    protected boolean isRtl() {
+        return getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
+    }
     public int getCoordinateX(int position) {
         return 0;
     }
@@ -292,4 +295,5 @@ abstract class ViewPagerIndicator extends View {
 
     abstract protected int measureWidth();
     abstract protected int measureHeight();
+
 }
