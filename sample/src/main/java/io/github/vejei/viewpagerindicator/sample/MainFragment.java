@@ -35,5 +35,10 @@ public class MainFragment extends Fragment {
         rectIndicatorButton.setOnClickListener(v -> {
             activity.addFragment(new RectIndicatorFragment());
         });
+
+        Button rectIndicatorRtlButton = view.findViewById(R.id.button_main_rect_indicator_rtl);
+        rectIndicatorRtlButton.setOnClickListener(v -> {
+            activity.addFragment(new RectIndicatorRtlFragment());
+        });
     }
 }

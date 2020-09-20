@@ -150,11 +150,14 @@ public final class RectIndicator extends ViewPagerIndicator {
     @Override
     public int getCoordinateX(int position) {
         int coordinate = getPaddingLeft();
+        if(isRtl()) coordinate = getMeasuredWidth() - indicatorWidth;
+
         for (int i = 0; i < getItemCount(); i++) {
-            if (i == position) {
-                return coordinate;
-            }
-            coordinate += indicatorWidth + indicatorGap;
+            if (i == position) return coordinate;
+
+            if(isRtl()) coordinate -= indicatorWidth + indicatorGap;
+            else coordinate += indicatorWidth + indicatorGap;
+
         }
         return coordinate;
     }
